@@ -1,7 +1,6 @@
 package com.sjy.photogallery;
 
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.net.Uri;
 import android.util.Log;
 
@@ -9,11 +8,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -71,13 +68,11 @@ public class FlickrFetchr {
 
     public List<GalleryItem> fetchRecentPhotos() {
         String url = buildUrl(FETCH_RECENTS_METHOD, null);
-        Log.d(TAG, url);
         return downloadGalleryItems(url);
     }
 
     public List<GalleryItem> searchPhotos(String query) {
         String url = buildUrl(SEARCH_METHOD, query);
-        Log.d(TAG, url);
         return downloadGalleryItems(url);
     }
 
