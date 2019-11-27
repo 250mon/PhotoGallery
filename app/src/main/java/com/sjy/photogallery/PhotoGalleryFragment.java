@@ -1,5 +1,6 @@
 package com.sjy.photogallery;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -44,6 +45,9 @@ public class PhotoGalleryFragment extends Fragment {
         // Getting API key from a file and make ENDPOINT
         FlickrFetchr.initEndpoint(getActivity());
         updateItems();
+
+        Intent i = PollService.newIntent(getContext());
+        getActivity().startService(i);
 
         Handler responseHandler = new Handler();
         mThumbnailDownloader = new ThumbnailDownloader<>(responseHandler);
