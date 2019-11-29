@@ -25,8 +25,12 @@ public class FlickrFetchr {
     private static final String FETCH_RECENTS_METHOD = "flickr.photos.getRecent";
     private static final String SEARCH_METHOD = "flickr.photos.search";
     private static Uri ENDPOINT = null;
-    public static void initEndpoint(Context context) {
 
+    /*
+     * Changed from the book
+     * - In order not to expose API_KEY in public, like GitHub
+     */
+    public static void initEndpoint(Context context) {
         String API_KEY = context.getString(R.string.api_key);
         ENDPOINT = Uri
                 .parse("https://api.flickr.com/services/rest/")
