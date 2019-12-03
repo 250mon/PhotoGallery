@@ -1,9 +1,11 @@
 package com.sjy.photogallery;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -14,7 +16,9 @@ public class VisibleFragment extends Fragment {
     private BroadcastReceiver mOnShowNotification = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Toast.makeText(getActivity(), "Got a Broadcast: " + intent.getAction(), Toast.LENGTH_LONG).show();
+            // If we receive this, we are visible, so cancel the notification
+            Log.i(TAG, "canceling the notification");
+            setResultCode(Activity.RESULT_CANCELED);
         }
     };
 
@@ -22,7 +26,7 @@ public class VisibleFragment extends Fragment {
     public void onStart() {
         super.onStart();
         IntentFilter filter = new IntentFilter(PollService.ACTION_SHOW_NOTIFICATION);
-        getActivity().registerReceiver(mOnShowNotification, filter);
+        getActivity().registerReceiver(mOnShowNotification, filter, PollService.PERM_PRIVATE, null);
     }
 
     @Override
