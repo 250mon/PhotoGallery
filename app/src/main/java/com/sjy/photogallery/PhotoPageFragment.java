@@ -1,11 +1,14 @@
 package com.sjy.photogallery;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
@@ -20,6 +23,10 @@ public class PhotoPageFragment extends VisibleFragment {
     private Uri mUri;
     private WebView mWebView;
     private ProgressBar mProgressBar;
+
+    public WebView getWebView() {
+        return mWebView;
+    }
 
     public static PhotoPageFragment newInstance(Uri uri) {
         Bundle args = new Bundle();
@@ -67,8 +74,16 @@ public class PhotoPageFragment extends VisibleFragment {
 
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                return false;
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                String scheme = request.getUrl().getScheme();
+                Log.d("PhotoPageFragment", "The scheme is " + scheme);
+                if (scheme.equalsIgnoreCase("HTTP") || scheme.equalsIgnoreCase("HTTPS")) {
+                    return false;
+                } else {
+                    /*Intent i = new Intent(Intent.ACTION_VIEW, request.getUrl());
+                    startActivity(i);*/
+                    return true;
+                }
             }
         });
 

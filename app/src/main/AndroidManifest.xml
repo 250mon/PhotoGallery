@@ -3,9 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.sjy.photogallery">
 
-    <permission android:name="com.sjy.photogallery.PRIVATE"
+    <permission
+        android:name="com.sjy.photogallery.PRIVATE"
         android:protectionLevel="signature" />
-    
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -27,21 +28,22 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".PhotoPageActivity"
+        <activity
+            android:name=".PhotoPageActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
-        
-        <service android:name=".PollService"/>
-        
-        <receiver android:name=".StartupReceiver" >
+
+        <service android:name=".PollService" />
+
+        <receiver android:name=".StartupReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".NotificationReceiver"
+        <receiver
+            android:name=".NotificationReceiver"
             android:exported="false">
-            <intent-filter
-                android:priority="-999">
+            <intent-filter android:priority="-999">
                 <action android:name="com.sjy.photogallery.SHOW_NOTIFICATION" />
             </intent-filter>
         </receiver>
